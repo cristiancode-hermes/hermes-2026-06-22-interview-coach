@@ -4,6 +4,20 @@ import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: (query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+
     await TestBed.configureTestingModule({
       providers: [provideRouter([])],
     }).compileComponents();
